@@ -84,40 +84,45 @@
 
     # packages = with pkgs; [];
   };
-  # home-manager = {
-  #   useGlobalPkgs = true;
-  #   useUserPackages = true;
-  #   users.dvir = { pkgs, ... }: {
-  #     home.stateVersion = "24.05";
-  #     programs = {
-  #       atuin.enable = true;
-  #       zsh = {
-  #         enable = true;
-  #         enableCompletion = true;
-  #         autosuggestion.enable = true;
-  #         syntaxHighlighting.enable = true;
-  #         plugins = [
-  #           {
-  #             # A prompt will appear the first time to configure it properly
-  #             # make sure to select MesloLGS NF as the font in Konsole
-  #             name = "powerlevel10k";
-  #             src = pkgs.zsh-powerlevel10k;
-  #             file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-  #           }
-  #           {
-  #             name = "fzf-tab";
-  #             src = pkgs.fetchFromGitHub {
-  #               owner = "Aloxaf";
-  #               repo = "fzf-tab";
-  #               rev = "c2b4aa5ad2532cca91f23908ac7f00efb7ff09c9";
-  #               sha256 = "1b4pksrc573aklk71dn2zikiymsvq19bgvamrdffpf7azpq6kxl2";
-  #             };
-  #           }
-  #         ];
-  #       };
-  #     };
-  #   };
-  # };
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    users.dvir = { pkgs, ... }: {
+      home.stateVersion = "24.05";
+      programs = {
+        atuin.enable = true;
+        zsh = {
+          enable = true;
+          enableCompletion = true;
+          autosuggestion.enable = true;
+          syntaxHighlighting.enable = true;
+          plugins = [
+            {
+              # A prompt will appear the first time to configure it properly
+              # make sure to select MesloLGS NF as the font in Konsole
+              name = "powerlevel10k";
+              src = pkgs.zsh-powerlevel10k;
+              file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+            }
+            {
+              name = "powerlevel10k-config";
+              src = ./p10k-config;
+              file = ".p10k.zsh";
+            }
+            {
+              name = "fzf-tab";
+              src = pkgs.fetchFromGitHub {
+                owner = "Aloxaf";
+                repo = "fzf-tab";
+                rev = "c2b4aa5ad2532cca91f23908ac7f00efb7ff09c9";
+                sha256 = "1b4pksrc573aklk71dn2zikiymsvq19bgvamrdffpf7azpq6kxl2";
+              };
+            }
+          ];
+        };
+      };
+    };
+  };
 
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
@@ -162,6 +167,8 @@
     nil
     steam-run
     fzf
+    atuin
+    (nerdfonts.override { fonts = [ "0xProto" ]; })
   ];
 
   services.openssh.enable = true;
