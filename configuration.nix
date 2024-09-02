@@ -55,7 +55,7 @@
     modesetting.enable = true;
     powerManagement = {
       enable = false;
-      finegrained = false; 
+      finegrained = false;
     };
     open = false;
     nvidiaSettings = true;
@@ -88,14 +88,14 @@
     useGlobalPkgs = true;
     useUserPackages = true;
     users.dvir = { pkgs, ... }: {
+      home.stateVersion = "24.05";
       programs = {
         atuin.enable = true;
-        zsh ={
+        zsh = {
           enable = true;
           enableCompletion = true;
           autosuggestion.enable = true;
           syntaxHighlighting.enable = true;
-          initExtra = "source ~/.p10k.zsh";
           plugins = [
             {
               # A prompt will appear the first time to configure it properly
@@ -114,8 +114,8 @@
               };
             }
           ];
-      };};
-      home.stateVersion = "24.05";
+        };
+      };
     };
   };
 
@@ -139,7 +139,7 @@
   };
   services.displayManager.autoLogin = {
     enable = true;
-    user = "dvur";
+    user = "dvir";
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -148,7 +148,6 @@
     protonup-qt
     zsh-powerlevel10k
     any-nix-shell
-    meslo-lgs-nf
     google-chrome
     github-desktop
     nixpkgs-fmt
@@ -160,7 +159,6 @@
     nixd
     nil
     steam-run
-    cosmic-term
     fzf
   ];
 
